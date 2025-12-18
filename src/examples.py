@@ -20,12 +20,12 @@ def create_binary_increment():
         'q0': {  # Mover al final del número
             '0': {'write': '0', 'move': 'R', 'next_state': 'q0'},
             '1': {'write': '1', 'move': 'R', 'next_state': 'q0'},
-            '_': {'write': '_', 'move': 'L', 'next_state': 'q1'}
+            '': {'write': '', 'move': 'L', 'next_state': 'q1'}
         },
         'q1': {  # Incrementar de derecha a izquierda
-            '0': {'write': '1', 'move': 'N', 'next_state': 'qf'},
+            '0': {'write': '1', 'move': 'S', 'next_state': 'qf'},
             '1': {'write': '0', 'move': 'L', 'next_state': 'q1'},
-            '_': {'write': '1', 'move': 'N', 'next_state': 'qf'}
+            '_': {'write': '1', 'move': 'S', 'next_state': 'qf'}
         }
     }
     
@@ -51,32 +51,32 @@ def create_palindrome_checker():
         'q0': {  # Estado inicial - marcar primer símbolo
             'a': {'write': '_', 'move': 'R', 'next_state': 'q1'},
             'b': {'write': '_', 'move': 'R', 'next_state': 'q2'},
-            '_': {'write': '_', 'move': 'S', 'next_state': 'qa'}  # Cadena vacía es palíndromo
+            '': {'write': '', 'move': 'S', 'next_state': 'qa'}  # Cadena vacía es palíndromo
         },
         'q1': {  # Marcamos 'a', buscamos 'a' al final
             'a': {'write': 'a', 'move': 'R', 'next_state': 'q1'},
             'b': {'write': 'b', 'move': 'R', 'next_state': 'q1'},
-            '_': {'write': '_', 'move': 'L', 'next_state': 'q3'}
+            '': {'write': '', 'move': 'L', 'next_state': 'q3'}
         },
         'q2': {  # Marcamos 'b', buscamos 'b' al final
             'a': {'write': 'a', 'move': 'R', 'next_state': 'q2'},
             'b': {'write': 'b', 'move': 'R', 'next_state': 'q2'},
-            '_': {'write': '_', 'move': 'L', 'next_state': 'q4'}
+            '': {'write': '', 'move': 'L', 'next_state': 'q4'}
         },
         'q3': {  # Verificar que el último símbolo sea 'a'
             'a': {'write': '_', 'move': 'L', 'next_state': 'q5'},
-            '_': {'write': '_', 'move': 'S', 'next_state': 'qa'},  # Un solo carácter
+            '': {'write': '', 'move': 'S', 'next_state': 'qa'},  # Un solo carácter
             'b': {'write': 'b', 'move': 'S', 'next_state': 'qr'}
         },
         'q4': {  # Verificar que el último símbolo sea 'b'
             'b': {'write': '_', 'move': 'L', 'next_state': 'q5'},
-            '_': {'write': '_', 'move': 'S', 'next_state': 'qa'},  # Un solo carácter
+            '': {'write': '', 'move': 'S', 'next_state': 'qa'},  # Un solo carácter
             'a': {'write': 'a', 'move': 'S', 'next_state': 'qr'}
         },
         'q5': {  # Regresar al inicio
             'a': {'write': 'a', 'move': 'L', 'next_state': 'q5'},
             'b': {'write': 'b', 'move': 'L', 'next_state': 'q5'},
-            '_': {'write': '_', 'move': 'R', 'next_state': 'q0'}
+            '': {'write': '', 'move': 'R', 'next_state': 'q0'}
         }
     }
     
@@ -101,11 +101,11 @@ def create_unary_addition():
         'q0': {  # Buscar el signo '+'
             '1': {'write': '1', 'move': 'R', 'next_state': 'q0'},
             '+': {'write': '1', 'move': 'R', 'next_state': 'q1'},
-            '_': {'write': '_', 'move': 'S', 'next_state': 'qf'}
+            '': {'write': '', 'move': 'S', 'next_state': 'qf'}
         },
         'q1': {  # Ir al final del segundo número
             '1': {'write': '1', 'move': 'R', 'next_state': 'q1'},
-            '_': {'write': '_', 'move': 'L', 'next_state': 'q2'}
+            '': {'write': '', 'move': 'L', 'next_state': 'q2'}
         },
         'q2': {  # Borrar el último '1' del segundo número
             '1': {'write': '_', 'move': 'S', 'next_state': 'qf'}
@@ -133,13 +133,13 @@ def create_binary_multiplication():
         'q0': {  # Estado inicial
             '0': {'write': '0', 'move': 'R', 'next_state': 'q0'},
             '1': {'write': '1', 'move': 'R', 'next_state': 'q0'},
-            '*': {'write': '*', 'move': 'R', 'next_state': 'q1'},
-            '_': {'write': '_', 'move': 'S', 'next_state': 'qf'}
+            '': {'write': '', 'move': 'R', 'next_state': 'q1'},
+            '': {'write': '', 'move': 'S', 'next_state': 'qf'}
         },
         'q1': {  # Leer segundo número
             '0': {'write': '0', 'move': 'R', 'next_state': 'q1'},
             '1': {'write': '1', 'move': 'R', 'next_state': 'q1'},
-            '_': {'write': '_', 'move': 'S', 'next_state': 'qf'}
+            '': {'write': '', 'move': 'S', 'next_state': 'qf'}
         }
     }
     
@@ -165,7 +165,7 @@ def create_copy_string():
             'a': {'write': 'A', 'move': 'R', 'next_state': 'q1'},
             'b': {'write': 'B', 'move': 'R', 'next_state': 'q2'},
             'c': {'write': 'C', 'move': 'R', 'next_state': 'q3'},
-            '_': {'write': '_', 'move': 'S', 'next_state': 'qf'}
+            '': {'write': '', 'move': 'S', 'next_state': 'qf'}
         },
         'q1': {  # Copiar 'a'
             'a': {'write': 'a', 'move': 'R', 'next_state': 'q1'},
