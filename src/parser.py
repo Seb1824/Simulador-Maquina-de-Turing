@@ -1,10 +1,7 @@
-"""
-Parser para cargar Máquinas de Turing desde archivos de texto
-"""
+# Parser para cargar Máquinas de Turing desde archivos de texto
 
 import re
 from .turing_machine import TuringMachine
-
 
 class TuringMachineParser:
     def __init__(self):
@@ -26,7 +23,7 @@ class TuringMachineParser:
             raise ValueError(f"Error al parsear el archivo: {str(e)}")
     
     def _parse_lines(self, lines):
-        """Procesa las líneas del archivo"""
+        # Procesa las líneas del archivo
         for line in lines:
             line = line.strip()
             
@@ -44,7 +41,7 @@ class TuringMachineParser:
             self._process_line(line)
     
     def _process_line(self, line):
-        """Procesa una línea según la sección actual"""
+        # Procesa una línea según la sección actual
         if self.current_section == 'metadata':
             self._parse_metadata(line)
         elif self.current_section == 'config':
@@ -57,13 +54,13 @@ class TuringMachineParser:
             self._parse_input(line)
     
     def _parse_metadata(self, line):
-        """Parsea metadata: name, description"""
+        # Parsea metadata: name, description
         if ':' in line:
             key, value = line.split(':', 1)
             self.sections['metadata'][key.strip()] = value.strip()
     
     def _parse_config(self, line):
-        """Parsea configuración: estados iniciales, finales, etc."""
+        # Parsea configuración: estados iniciales, finales, etc.
         if ':' in line:
             key, value = line.split(':', 1)
             key = key.strip()
@@ -83,10 +80,7 @@ class TuringMachineParser:
             self.sections['alphabet'][key.strip()] = symbols
     
     def _parse_transition(self, line):
-        """
-        Parsea una transición
-        Formato: current_state, read_symbol -> write_symbol, move_direction, next_state
-        """
+        # Parsea una transición
         try:
             # Dividir por '->'
             if '->' not in line:
@@ -123,11 +117,11 @@ class TuringMachineParser:
             raise ValueError(f"Error al parsear transición '{line}': {str(e)}")
     
     def _parse_input(self, line):
-        """Parsea la cadena de entrada"""
+        # Parsea la cadena de entrada
         self.sections['input'] += line
     
     def _create_machine(self):
-        """Crea la Máquina de Turing a partir de los datos parseados"""
+        # Crea la Máquina de Turing a partir de los datos parseados
         if 'initial_state' not in self.sections['config']:
             raise ValueError("Falta especificar initial_state en [CONFIG]")
         
@@ -169,9 +163,9 @@ class TuringMachineParser:
         return tm, input_string
     
     def validate_file(self, file_content):
-        """
-        Valida que el archivo tenga el formato correcto
-        """
+        
+        #Valida que el archivo tenga el formato correcto
+
         errors = []
         
         # Verificar secciones requeridas
