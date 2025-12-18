@@ -293,7 +293,6 @@ def main():
     
     # Título
     st.title("🖥️ Simulador de Máquina de Turing")
-    st.markdown("### Laboratorio N°12 - Teoría de la Computación")
     st.markdown("---")
     
     # Sidebar - Controles
