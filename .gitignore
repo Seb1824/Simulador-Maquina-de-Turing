@@ -1,7 +1,6 @@
 venv/
 __pycache__/
 *.pyc
-ejemplos/
 src/tape.py
 src/transition.py
 src/examples.py

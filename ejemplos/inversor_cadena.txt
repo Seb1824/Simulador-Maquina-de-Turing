@@ -1,0 +1,77 @@
+# Máquina de Turing - Inversor de Cadena
+# Invierte una cadena: abc -> cba
+
+[METADATA]
+name: Inversor de Cadena
+description: Invierte el orden de una cadena (abc se convierte en cba)
+
+[CONFIG]
+initial_state: q0
+accept_states: qf
+reject_states: 
+blank_symbol: _
+
+[ALPHABET]
+input: a, b, c
+tape: a, b, c, #, _
+
+[TRANSITIONS]
+# Ir al final de la cadena
+q0, a -> a, R, q0
+q0, b -> b, R, q0
+q0, c -> c, R, q0
+q0, _ -> #, L, q1
+
+# Copiar desde el final al principio
+q1, a -> _, L, q2a
+q1, b -> _, L, q2b
+q1, c -> _, L, q2c
+q1, # -> #, R, q5
+
+# Procesar 'a'
+q2a, a -> a, L, q2a
+q2a, b -> b, L, q2a
+q2a, c -> c, L, q2a
+q2a, # -> #, R, q3a
+
+q3a, _ -> a, R, q4
+q3a, a -> a, R, q3a
+q3a, b -> b, R, q3a
+q3a, c -> c, R, q3a
+
+# Procesar 'b'
+q2b, a -> a, L, q2b
+q2b, b -> b, L, q2b
+q2b, c -> c, L, q2b
+q2b, # -> #, R, q3b
+
+q3b, _ -> b, R, q4
+q3b, a -> a, R, q3b
+q3b, b -> b, R, q3b
+q3b, c -> c, R, q3b
+
+# Procesar 'c'
+q2c, a -> a, L, q2c
+q2c, b -> b, L, q2c
+q2c, c -> c, L, q2c
+q2c, # -> #, R, q3c
+
+q3c, _ -> c, R, q4
+q3c, a -> a, R, q3c
+q3c, b -> b, R, q3c
+q3c, c -> c, R, q3c
+
+# Continuar
+q4, a -> a, R, q4
+q4, b -> b, R, q4
+q4, c -> c, R, q4
+q4, # -> #, L, q1
+
+# Limpiar #
+q5, a -> a, R, q5
+q5, b -> b, R, q5
+q5, c -> c, R, q5
+q5, _ -> _, S, qf
+
+[INPUT]
+abc

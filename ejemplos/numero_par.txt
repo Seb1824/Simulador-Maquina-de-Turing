@@ -1,0 +1,59 @@
+# Máquina de Turing - Verificador de Número Par
+# Verifica si un número binario es par (termina en 0)
+
+[METADATA]
+name: Verificador de Número Par
+description: Acepta si el número binario termina en 0 (es par)
+
+[CONFIG]
+initial_state: q0# Máquina de Turing - Verificador de Número Par
+# Verifica si un número binario es par (termina en 0)
+
+[METADATA]
+name: Verificador de Número Par
+description: Acepta si el número binario termina en 0 (es par)
+
+[CONFIG]
+initial_state: q0
+accept_states: qa
+reject_states: qr
+blank_symbol: _
+
+[ALPHABET]
+input: 0, 1
+tape: 0, 1, _
+
+[TRANSITIONS]
+# Mover al final del número
+q0, 0 -> 0, R, q0
+q0, 1 -> 1, R, q0
+q0, _ -> _, L, q1
+
+# Verificar el último dígito
+q1, 0 -> 0, S, qa
+q1, 1 -> 1, S, qr
+q1, _ -> _, S, qr
+
+[INPUT]
+1010
+accept_states: qa
+reject_states: qr
+blank_symbol: _
+
+[ALPHABET]
+input: 0, 1
+tape: 0, 1, _
+
+[TRANSITIONS]
+# Mover al final del número
+q0, 0 -> 0, R, q0
+q0, 1 -> 1, R, q0
+q0, _ -> _, L, q1
+
+# Verificar el último dígito
+q1, 0 -> 0, N, qa
+q1, 1 -> 1, N, qr
+q1, _ -> _, N, qr
+
+[INPUT]
+1010

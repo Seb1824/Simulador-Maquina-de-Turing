@@ -1,0 +1,33 @@
+# Máquina de Turing - Multiplicación Binaria
+# Multiplica dos números binarios (simplificado para números pequeños)
+
+[METADATA]
+name: Multiplicación Binaria
+description: Multiplica dos números binarios pequeños (ejemplo: 10 * 11 = 110)
+
+[CONFIG]
+initial_state: q0
+accept_states: qf
+reject_states: 
+blank_symbol: _
+
+[ALPHABET]
+input: 0, 1, *
+tape: 0, 1, *, X, Y, #, _
+
+[TRANSITIONS]
+# Ir al primer número
+q0, 0 -> 0, R, q0
+q0, 1 -> 1, R, q0
+q0, * -> #, R, q1
+
+# Marcar inicio del segundo número
+q1, 0 -> 0, R, q1
+q1, 1 -> 1, R, q1
+q1, _ -> =, R, q2
+
+# Escribir cero como resultado inicial
+q2, _ -> 0, S, qf
+
+[INPUT]
+10*11

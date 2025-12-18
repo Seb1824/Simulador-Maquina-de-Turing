@@ -1,0 +1,44 @@
+# Máquina de Turing - Reconocedor del Lenguaje a^n b^n
+# Acepta cadenas con igual número de 'a' seguidas de 'b' (aaabbb es válido)
+
+[METADATA]
+name: Lenguaje a^n b^n
+description: Reconoce el lenguaje {a^n b^n | n >= 0}, es decir, igual número de a's seguidas de b's
+
+[CONFIG]
+initial_state: q0
+accept_states: qa
+reject_states: qr
+blank_symbol: _
+
+[ALPHABET]
+input: a, b
+tape: a, b, X, Y, _
+
+[TRANSITIONS]
+# Marcar primera 'a'
+q0, a -> X, R, q1
+q0, b -> b, S, qr
+q0, Y -> Y, R, q0
+q0, _ -> _, S, qa
+
+# Buscar primera 'b'
+q1, a -> a, R, q1
+q1, b -> Y, L, q2
+q1, Y -> Y, R, q1
+q1, _ -> _, S, qr
+
+# Regresar al inicio
+q2, a -> a, L, q2
+q2, X -> X, R, q0
+q2, Y -> Y, L, q2
+
+# Verificar que solo queden Y's
+q0, Y -> Y, R, q3
+q3, Y -> Y, R, q3
+q3, _ -> _, S, qa
+q3, a -> a, S, qr
+q3, b -> b, S, qr
+
+[INPUT]
+aaabbb

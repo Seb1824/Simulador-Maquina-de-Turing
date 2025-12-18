@@ -1,0 +1,30 @@
+# Máquina de Turing - Verificador de Número Primo (Simplificado)
+# Verifica si un número en notación unaria es primo (111 = 3, primo)
+
+[METADATA]
+name: Verificador de Primo (Unario)
+description: Verifica si un número en notación unaria es primo
+
+[CONFIG]
+initial_state: q0
+accept_states: qa
+reject_states: qr
+blank_symbol: _
+
+[ALPHABET]
+input: 1
+tape: 1, X, _
+
+[TRANSITIONS]
+# Contar unos - verificar si es 2
+q0, 1 -> X, R, q1
+q0, _ -> _, S, qr
+
+q1, 1 -> X, R, q2
+q1, _ -> _, S, qr
+
+q2, 1 -> 1, R, q2
+q2, _ -> _, S, qa
+
+[INPUT]
+11

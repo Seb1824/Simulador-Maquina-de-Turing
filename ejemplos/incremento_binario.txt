@@ -1,0 +1,30 @@
+# Máquina de Turing - Incremento Binario
+# Suma 1 a un número binario
+
+[METADATA]
+name: Incremento Binario
+description: Suma 1 a un número binario (ejemplo: 1011 -> 1100)
+
+[CONFIG]
+initial_state: q0
+accept_states: qf
+reject_states: 
+blank_symbol: _
+
+[ALPHABET]
+input: 0, 1
+tape: 0, 1, _
+
+[TRANSITIONS]
+# Mover al final del número
+q0, 0 -> 0, R, q0
+q0, 1 -> 1, R, q0
+q0, _ -> _, L, q1
+
+# Incrementar de derecha a izquierda (propagación de acarreo)
+q1, 1 -> 0, L, q1
+q1, 0 -> 1, S, qf
+q1, _ -> 1, S, qf
+
+[INPUT]
+1011
